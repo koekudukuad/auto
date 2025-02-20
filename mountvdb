@@ -1,0 +1,8 @@
+df -h
+fdisk -l
+blkid /dev/vdb
+mkdir -p /data
+mkfs.ext4 /dev/vdb
+echo '/dev/vdb /data ext4 defaults 0 0' >> /etc/fstab
+echo '/dev/vdb /data xfs defaults 0 0' >> /etc/fstab
+mount -a
