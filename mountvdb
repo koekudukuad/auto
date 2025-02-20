@@ -1,9 +1,21 @@
 #!/bin/bash
+#To check the mounted partitions, use the command
 df -h
+
+#List the partitions using the fdisk -l
 fdisk -l
+
+#To determine the filesystem type of the disk or partition.
 blkid /dev/vdb
+
+#3. Create a data folder to mount /dev/vdb into
 mkdir -p /data
+
+#4. Format disk /dev/vdb in ext4
 mkfs.ext4 /dev/vdb
+
+#5. Add to fstab file to automatically mount the system when reboot
 echo '/dev/vdb /data ext4 defaults 0 0' >> /etc/fstab
-echo '/dev/vdb /data xfs defaults 0 0' >> /etc/fstab
+
+#Apply the changes by mounting all filesystems
 mount -a
