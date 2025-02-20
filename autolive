@@ -1,58 +1,60 @@
 #!/bin/bash
-#convert time to jakarta
 
+# Konversi waktu ke Jakarta
 sudo timedatectl set-timezone Asia/Jakarta
-
 sudo timedatectl set-ntp true
 
-#cek
-
+# Cek waktu
 timedatectl
 
-#restart cronjob
-
+# Restart cronjob
 service cron restart
-
 service cron status
 
-#buat file bash
-echo "#!/bin/bash
-
+# Buat file bash menggunakan cat <<'EOF'
+cat <<'EOF' > /root/namachanel.sh
+#!/bin/bash
 # Direktori tempat video disimpan
 VIDEO_DIR="/root/data"
-
 # Tentukan nama file video
 VIDEO_FILES=(
-"BettyVessels1.mp4"
-"BettyVessels2.mp4"
-"BettyVessels3.mp4"
-"BettyVessels4.mp4"
-"BettyVessels5.mp4"
-"BettyVessels6.mp4"
-"BettyVessels7.mp4"
-"BettyVessels8.mp4"
-    # Tambahkan lebih banyak file sesuai kebutuhan
+    "BettyVessels1.mp4"
+    "BettyVessels2.mp4"
+    "BettyVessels3.mp4"
+    "BettyVessels4.mp4"
+    "BettyVessels5.mp4"
+    "BettyVessels6.mp4"
+    "BettyVessels7.mp4"
+    "BettyVessels8.mp4"
 )
-
 # Hitung jumlah file di dalam array
 TOTAL_FILES=${#VIDEO_FILES[@]}
-
+# Cek apakah TOTAL_FILES lebih besar dari 0
+if [ $TOTAL_FILES -eq 0 ]; then
+    echo "Error: Tidak ada file video yang ditemukan."
+    exit 1
+fi
 # Dapatkan hari saat ini dalam siklus jumlah file
-DAY_INDEX=$(( $(date +%s) / 86400 % TOTAL_FILES ))
-
+DAY_INDEX=$(( \$(date +%s) / 86400 % TOTAL_FILES ))
 # Pilih video berdasarkan DAY_INDEX
-INPUT="$VIDEO_DIR/${VIDEO_FILES[$DAY_INDEX]}"
-
+INPUT="\$VIDEO_DIR/\${VIDEO_FILES[\$DAY_INDEX]}"
 # URL RTMP YouTube dengan Stream Key
 URL="rtmp://a.rtmp.youtube.com/live2/f3ca-4ghf-8zmj-xww9-b4vq"
 
-
 # Command ffmpeg untuk streaming
-#nohup /usr/local/bin/ffmpeg -stream_loop -1 -t 17:59:00 -re -i "$INPUT" -codec copy -g 120 -b:v 2500k -bufsize 5000k -flvflags no_duration_filesize -f flv "$URL" > /root/data/masteranke.log 2>&1 &
-nohup /usr/local/bin/ffmpeg -stream_loop -1 -t 17:59:00 -re -i "$INPUT" \
+nohup /usr/local/bin/ffmpeg -stream_loop -1 -t 17:59:00 -re -i "\$INPUT" \
 -c:v copy -c:a copy -r 30 -b:v 800k -bufsize 1600k \
--flvflags no_duration_filesize -f flv "$URL" > /root/data/jasmineharvey.log 2>&1 &
-" > namachanel.sh
+-flvflags no_duration_filesize -f flv "\$URL" > /root/data/jasmineharvey.log 2>&1 &
+EOF
 
-#chmod file bash
-chmod +x namachanel.sh
+# Berikan izin eksekusi pada file
+chmod +x /root/namachanel.sh
+
+#install ffmpeg
+wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz 
+tar xf ffmpeg-release-amd64-static.tar.xz 
+cd ffmpeg-*-amd64-static 
+cp ffmpeg /usr/local/bin/ 
+cp ffprobe /usr/local/bin/ 
+ffmpeg -version
+
