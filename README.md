@@ -2,6 +2,7 @@
 
 gunakan debian 11/10
 
+rekomendasi ubuntu
 ubuntu 18 /Ubuntu 20.04
 
 agar ffmpeg tidak conflic ( saya pake debian 12 averror ffmpeg )
