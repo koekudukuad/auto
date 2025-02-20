@@ -50,7 +50,8 @@ EOF
 # Berikan izin eksekusi pada file
 chmod +x /root/namachanel.sh
 
-#install ffmpeg
+#install ffmpeg dan xz
+apt install xz-utils
 curl -o ffmpeg-release-amd64-static.tar.xz https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz 
 tar xf ffmpeg-release-amd64-static.tar.xz 
 cd ffmpeg-*-amd64-static 
