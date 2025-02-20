@@ -51,7 +51,7 @@ EOF
 chmod +x /root/namachanel.sh
 
 #install ffmpeg
-wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz 
+curl -o ffmpeg-release-amd64-static.tar.xz https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz 
 tar xf ffmpeg-release-amd64-static.tar.xz 
 cd ffmpeg-*-amd64-static 
 cp ffmpeg /usr/local/bin/ 
