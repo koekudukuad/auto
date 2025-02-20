@@ -1,4 +1,4 @@
-
+#!/bin/bash
 #convert time to jakarta
 
 sudo timedatectl set-timezone Asia/Jakarta
