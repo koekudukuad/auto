@@ -12,7 +12,7 @@ service cron restart
 service cron status
 
 # Buat file bash menggunakan cat <<'EOF'
-cat <<'EOF' > /root/namachanel.sh
+cat <<'EOF' > namachanel.sh
 #!/bin/bash
 # Direktori tempat video disimpan
 VIDEO_DIR="/root/data"
