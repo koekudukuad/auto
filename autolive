@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Konversi waktu ke Jakarta
-sudo timedatectl set-timezone Asia/Jakarta
-sudo timedatectl set-ntp true
+timedatectl set-timezone Asia/Jakarta
+timedatectl set-ntp true
 
 # Cek waktu
 timedatectl
